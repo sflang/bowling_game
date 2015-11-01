@@ -1,19 +1,18 @@
 class Frame
 	
-  attr_accessor :ball_scores, :ball_score_multipliers
+  attr_accessor :ball_scores
 
-  #initialize ball scores and reset score multipliers
+  #initialize ball scores
   def init_ball_scores(scores)
 
     self.ball_scores = scores
-	self.ball_score_multipliers = scores.map { |i| 1}
   end
     
-  #multiply each ball score by its mutiplier and sum result
+  #sum the ball score array
   def score
 
-    (0...self.ball_scores.length).inject(0) do |sum, i| 
-	  sum += self.ball_scores[i] * self.ball_score_multipliers[i]
+    self.ball_scores.inject(0) do |sum, i| 
+	  sum += i
 	end
   end
 
