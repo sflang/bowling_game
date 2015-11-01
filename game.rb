@@ -17,26 +17,24 @@ class Game
 	  end
 	end
 
-	#now walk the frames array and look for spares and strikes
-	#update the ball_score_multipliers based on strikes/spares in the first 9 frames
+	#Walk the first 9 elements of the frames array and look for spares and strikes
+	#update the ball_score_multipliers based on strikes/spares
 	def update_frame_scores
       
-      self.frames.each_with_index do |frame, i|
-      	if i < 9
-      	  #if strike or spare increment multiplier for the first ball in the next frame
-      	  if frame.strike? || frame.spare?
+      self.frames[0..8].each_with_index do |frame, i|
+      	#if strike or spare, increment multiplier for the first ball in the next frame
+	  	if frame.strike? || frame.spare?
 
-            self.frames[i+1].ball_score_multipliers[0] += 1
-          end
+          self.frames[i+1].ball_score_multipliers[0] += 1
+        end
           
-          #if strike, increment multiplier for the second ball, which may be located
-          #in the next frame, or the next next frame
-      	  if frame.strike?
+        #if strike, increment multiplier for the second ball, which may be located
+        #in the next frame, or the next next frame
+      	if frame.strike?
             
-            self.frames[i+1].ball_score_multipliers.length > 1 ?
-              self.frames[i+1].ball_score_multipliers[1] += 1  : 
-              self.frames[i+2].ball_score_multipliers[0] += 1
-          end
+          self.frames[i+1].ball_score_multipliers.length > 1 ?
+            self.frames[i+1].ball_score_multipliers[1] += 1  : 
+            self.frames[i+2].ball_score_multipliers[0] += 1
         end
       end
     end
