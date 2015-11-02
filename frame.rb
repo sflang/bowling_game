@@ -1,6 +1,6 @@
 class Frame
 	
-  attr_accessor :ball_scores
+  attr_accessor :ball_scores, :frame_score
 
   #initialize ball scores
   def init_ball_scores(scores)
